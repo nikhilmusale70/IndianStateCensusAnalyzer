@@ -22,7 +22,7 @@ public class IndianStateCensusTest {
     public void checkCensusCSV_IsCorrect(){
         try {
             IndianStateCensus isc = new IndianStateCensus();
-            isc.checkingFileIfExists();
+            Assert.assertEquals(1,isc.checkingFileIfExists());
         } catch (CustomException e) {
             e.printStackTrace();
         }

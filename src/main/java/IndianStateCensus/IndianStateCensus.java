@@ -8,7 +8,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.scene.shape.Path;
 
@@ -23,28 +27,36 @@ public class IndianStateCensus {
     }
 
     public void loadingDataFromCSV() throws IOException, CsvValidationException, CustomException {
-        FileReader fr = new FileReader("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\IndiaStateCensusData.csv");
-        CSVReader csvReader = new CSVReader(fr);
-        String[] nextLine;
+        try {
+            FileReader fr = new FileReader("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\IndiaStateCensusData.csv");
+            CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+            CSVReader csvReader = new CSVReaderBuilder(fr).withCSVParser(parser).build();
 
-        nextLine = csvReader.readNext();
-        while ((nextLine = csvReader.readNext()) != null) {
+//        CSVReader csvReader = new CSVReader(fr);
+            String[] nextLine;
 
-            Iterator<String> it = Arrays.stream(nextLine).iterator();
-            String state = it.next();
-            String population = it.next();
-            String areaInSqKm = it.next();
-            String DensityPerSqKm = it.next();
+            nextLine = csvReader.readNext();
+            while ((nextLine = csvReader.readNext()) != null) {
 
-            try{
-                tempObj = new StateCensusData(state, Long.parseLong(population), Long.parseLong(areaInSqKm), Integer.parseInt(DensityPerSqKm));
-                scd.add(tempObj);
+                Iterator<String> it = Arrays.stream(nextLine).iterator();
+                String state = it.next();
+                String population = it.next();
+                String areaInSqKm = it.next();
+                String DensityPerSqKm = it.next();
+
+                try{
+                    tempObj = new StateCensusData(state, Long.parseLong(population), Long.parseLong(areaInSqKm), Integer.parseInt(DensityPerSqKm));
+                    scd.add(tempObj);
+                }
+                catch (Exception e){
+                    throw new CustomException("Type incoorect");
+                }
             }
-            catch (Exception e){
-                throw new CustomException("Type incoorect");
-            }
+            System.out.println();
+        }catch (Exception e){
+            throw new CustomException("Delimiter Error");
         }
-        System.out.println();
+
     }
 
     public int checkingFileIfExists() throws CustomException {

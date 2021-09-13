@@ -52,4 +52,16 @@ public class IndianStateCensusTest {
         }
     }
 
+    @Test
+    public void checking_HeaderIsCorrect(){
+        try {
+            IndianStateCensus isc = new IndianStateCensus();
+            isc.loadingDataFromCSV();
+            Assert.assertEquals(29,isc.checkState());
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+    }
+
 }

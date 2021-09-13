@@ -16,13 +16,13 @@ public class IndianStateCensus {
     ArrayList<StateCensusData> scd = new ArrayList<>();
     StateCensusData tempObj;
 
-    public int checkState() throws CsvValidationException, IOException {
+    public int checkState() throws CsvValidationException, IOException, CustomException {
             IndianStateCensus asc = new IndianStateCensus();
             asc.loadingDataFromCSV();
             return (asc.scd.size());
     }
 
-    public void loadingDataFromCSV() throws IOException, CsvValidationException {
+    public void loadingDataFromCSV() throws IOException, CsvValidationException, CustomException {
         FileReader fr = new FileReader("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\IndiaStateCensusData.csv");
         CSVReader csvReader = new CSVReader(fr);
         String[] nextLine;
@@ -36,8 +36,13 @@ public class IndianStateCensus {
             String areaInSqKm = it.next();
             String DensityPerSqKm = it.next();
 
-            tempObj = new StateCensusData(state, Long.parseLong(population), Long.parseLong(areaInSqKm), Integer.parseInt(DensityPerSqKm));
-            scd.add(tempObj);
+            try{
+                tempObj = new StateCensusData(state, Long.parseLong(population), Long.parseLong(areaInSqKm), Integer.parseInt(DensityPerSqKm));
+                scd.add(tempObj);
+            }
+            catch (Exception e){
+                throw new CustomException("Type incoorect");
+            }
         }
         System.out.println();
     }

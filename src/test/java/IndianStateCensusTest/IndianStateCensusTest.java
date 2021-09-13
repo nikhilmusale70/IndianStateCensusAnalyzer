@@ -15,6 +15,10 @@ public class IndianStateCensusTest {
         isc.checkState();
     }
 
-    
+    @Test
+    public void checkCensus_IsCorrect(){
+        IndianStateCensus isc = new IndianStateCensus();
+        Assert.assertTrue(isc.checkingFileIfExists());
+    }
 
 }

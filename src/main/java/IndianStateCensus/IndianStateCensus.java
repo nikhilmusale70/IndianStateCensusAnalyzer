@@ -42,14 +42,14 @@ public class IndianStateCensus {
         System.out.println();
     }
 
-    public boolean checkingFileIfExists(){
+    public void checkingFileIfExists() throws CustomException {
         File file = new File("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\IndiaStateCensusData.csv");
         if (file.exists()){
-                return true;
+            throw new CustomException("File is there");
         }
-        else
-            return false;
-
+        else {
+            throw new CustomException("File not found");
+        }
     }
 }
 

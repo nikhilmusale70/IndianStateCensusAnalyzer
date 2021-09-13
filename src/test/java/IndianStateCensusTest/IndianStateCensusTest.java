@@ -1,5 +1,7 @@
 package IndianStateCensusTest;
 
+
+import IndianStateCensus.CustomException;
 import IndianStateCensus.IndianStateCensus;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.Assert;
@@ -12,13 +14,18 @@ public class IndianStateCensusTest {
     @Test
     public void checksState_NumberOfState() throws CsvValidationException, IOException {
         IndianStateCensus isc = new IndianStateCensus();
-        isc.checkState();
+        Assert.assertEquals(29,isc.checkState());
+
     }
 
     @Test
-    public void checkCensus_IsCorrect(){
-        IndianStateCensus isc = new IndianStateCensus();
-        Assert.assertTrue(isc.checkingFileIfExists());
+    public void checkCensusCSV_IsCorrect(){
+        try {
+            IndianStateCensus isc = new IndianStateCensus();
+            isc.checkingFileIfExists();
+        } catch (CustomException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -93,5 +93,28 @@ public class IndianStateCensusTest {
         }
     }
 
+    @Test
+    public void checkingStateFile_IfFileCorrect_ButTypeIncorrect(){
+        try {
+            IndianStateCode isc = new IndianStateCode();
+            isc.loadingStateDataFromCSV();
+            Assert.assertEquals(37,isc.checkStateData());
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+    }
+
+    @Test
+    public void checkingIfTypeIsCorrectOrNot(){
+        try {
+            IndianStateCode isc = new IndianStateCode();
+            isc.loadingStateDataFromCSV();
+            Assert.assertEquals(37,isc.checkStateData());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

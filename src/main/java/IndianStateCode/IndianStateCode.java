@@ -21,12 +21,12 @@ public class IndianStateCode {
     ArrayList<IndianStateData> scd = new ArrayList<>();
     IndianStateData tempObj;
 
-    public int checkStateData() throws CsvValidationException, IOException {
+    public int checkStateData() throws CsvValidationException, IOException, CustomException {
         IndianStateCode asc = new IndianStateCode();
         asc.loadingStateDataFromCSV();
         return (asc.scd.size());
     }
-    public void loadingStateDataFromCSV() throws IOException, CsvValidationException {
+    public void loadingStateDataFromCSV() throws IOException, CsvValidationException, CustomException {
 
         FileReader fr = new FileReader("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\StateCode.csv");
         CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
@@ -41,9 +41,13 @@ public class IndianStateCode {
             String population = it.next();
             String areaInSqKm = it.next();
             String DensityPerSqKm = it.next();
-
+        try{
             tempObj = new IndianStateData(Integer.parseInt(state), population, Integer.parseInt(areaInSqKm), DensityPerSqKm);
             scd.add(tempObj);
+        }
+        catch (Exception e){
+            throw new CustomException("Type incorrect");
+        }
         }
         System.out.println();
 

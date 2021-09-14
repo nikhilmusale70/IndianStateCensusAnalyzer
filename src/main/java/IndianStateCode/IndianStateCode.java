@@ -35,6 +35,16 @@ public class IndianStateCode {
         String[] nextLine;
 
         nextLine = csvReader.readNext();
+            try{
+                if (nextLine[0].equals("SrNo") && nextLine[1].equals("State Name") && nextLine[2].equals("TIN") && nextLine[3].equals(",StateCode")  ){
+                }
+                else{
+                    throw new CustomException("Incorrect header");
+                }
+            }
+            catch (CustomException e){
+                throw new CustomException("Incorrect header");
+            }
         while ((nextLine = csvReader.readNext()) != null) {
 
             Iterator<String> it = Arrays.stream(nextLine).iterator();
@@ -50,7 +60,7 @@ public class IndianStateCode {
             }
         }
         }catch (Exception e){
-            throw new CustomException("Delimeter error");
+            throw new CustomException("Incorrect header");
         }
         System.out.println();
 

@@ -35,7 +35,7 @@ public class IndianStateCensus {
 
             nextLine = csvReader.readNext();
             try{
-                if (nextLine[0].equals("state") && nextLine[1].equals("population") && nextLine[2].equals("areaInSqKm") && nextLine[3].equals("DensityPerSqKm")  ){
+                if (nextLine[0].equals("State") && nextLine[1].equals("Population") && nextLine[2].equals("AreaInSqKm") && nextLine[3].equals("DensityPerSqKm")  ){
                 }
                 else{
                     throw new CustomException("Incorrect header");

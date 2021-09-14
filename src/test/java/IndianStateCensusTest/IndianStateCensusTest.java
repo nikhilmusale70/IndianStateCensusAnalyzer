@@ -1,8 +1,9 @@
 package IndianStateCensusTest;
 
-
+import IndianStateCensus.*;
 import IndianStateCensus.CustomException;
 import IndianStateCensus.IndianStateCensus;
+import IndianStateCode.IndianStateCode;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -63,5 +64,14 @@ public class IndianStateCensusTest {
             e.getMessage();
         }
     }
+
+    @Test //uc2
+    public void checkingIf_ReadProperly_FromCsv() throws CsvValidationException, IOException, CustomException {
+        IndianStateCensus iscensus = new IndianStateCensus();
+        IndianStateCode isc = new IndianStateCode();
+        Assert.assertEquals(37,isc.checkStateData());
+    }
+
+    
 
 }

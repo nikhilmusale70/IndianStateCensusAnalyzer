@@ -117,4 +117,16 @@ public class IndianStateCensusTest {
         }
     }
 
+    @Test
+    public void checkingIfDelimeterIsCorrectOrNot(){
+        try {
+            IndianStateCode isc = new IndianStateCode();
+            isc.loadingStateDataFromCSV();
+            Assert.assertEquals(37,isc.checkStateData());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

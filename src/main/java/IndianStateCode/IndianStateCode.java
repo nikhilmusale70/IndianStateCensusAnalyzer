@@ -29,6 +29,7 @@ public class IndianStateCode {
     public void loadingStateDataFromCSV() throws IOException, CsvValidationException, CustomException {
 
         FileReader fr = new FileReader("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\StateCode.csv");
+        try{
         CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
         CSVReader csvReader = new CSVReaderBuilder(fr).withCSVParser(parser).build();
         String[] nextLine;
@@ -41,13 +42,15 @@ public class IndianStateCode {
             String population = it.next();
             String areaInSqKm = it.next();
             String DensityPerSqKm = it.next();
-        try{
-            tempObj = new IndianStateData(Integer.parseInt(state), population, Integer.parseInt(areaInSqKm), DensityPerSqKm);
-            scd.add(tempObj);
+            try {
+                tempObj = new IndianStateData(Integer.parseInt(state), population, Integer.parseInt(areaInSqKm), DensityPerSqKm);
+                scd.add(tempObj);
+            } catch (Exception e) {
+                throw new CustomException("Type incorrect");
+            }
         }
-        catch (Exception e){
-            throw new CustomException("Type incorrect");
-        }
+        }catch (Exception e){
+            throw new CustomException("Delimeter error");
         }
         System.out.println();
 

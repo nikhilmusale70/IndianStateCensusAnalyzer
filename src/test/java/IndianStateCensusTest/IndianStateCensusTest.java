@@ -72,6 +72,26 @@ public class IndianStateCensusTest {
         Assert.assertEquals(37,isc.checkStateData());
     }
 
-    
+//    @Test
+//    public void checkStateCSV_IsCorrect(){
+//        try {
+//            IndianStateCode isc = new IndianStateCode();
+//            Assert.assertEquals(37,isc.checkStateData());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    @Test
+    public void checkStateFileCSV_IsCorrect(){
+        try {
+            IndianStateCode isc = new IndianStateCode();
+            isc.fileExistsOrNot();
+            Assert.assertEquals(1,isc.fileExistsOrNot());
+        } catch (CustomException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

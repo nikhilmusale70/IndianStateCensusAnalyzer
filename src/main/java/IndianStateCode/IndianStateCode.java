@@ -1,5 +1,6 @@
 package IndianStateCode;
 
+import IndianStateCensus.CustomException;
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -10,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -21,7 +24,6 @@ public class IndianStateCode {
     public int checkStateData() throws CsvValidationException, IOException {
         IndianStateCode asc = new IndianStateCode();
         asc.loadingStateDataFromCSV();
-        System.out.println(asc.scd.size());
         return (asc.scd.size());
     }
     public void loadingStateDataFromCSV() throws IOException, CsvValidationException {
@@ -45,5 +47,15 @@ public class IndianStateCode {
         }
         System.out.println();
 
+    }
+
+    public int fileExistsOrNot() throws CustomException {
+        File file = new File("C:\\Nikhil\\bridgelabz\\IndianStateCensus\\CSVFiles\\StateCode.csv");
+        if (file.exists()){
+            return 1;
+        }
+        else {
+            throw new CustomException("File not found");
+        }
     }
 }
